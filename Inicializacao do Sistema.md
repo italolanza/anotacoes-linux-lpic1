@@ -46,7 +46,7 @@ Trabalha com `runlevel`'s , que sao modulos que definem os programas/processos q
 + **`/etc/rc[0-6].d/`** : Scripts relacionados ao *runlevel \[0-6\]* 
 	+ Esses scritps sao executados quando o comando `init [0-6]` e invocado.
 + **`service [serviço] [opçao]`** : Comando para gerenciar serviços no SysVInit
-+ **`telinit`** : Equivalente ao `init`
++ **`telinit`** : Equivalente ao `init`, porem avisa o usuario sobre reboots e desligamentos.
 	+ **`telinit -q`** : Recarrega as configuraçoes do /etc/inittab e notifica os usuarios logados sobre reboot e power off.
 
 ### Upstart
@@ -62,7 +62,7 @@ Scritps de inicializaçao do Systemd: **`/etc/systemd/system/`**
 + **`systemctl get-default`** : Retorna o *target* padrao configurado.
 + **`systemctl set-default`** : Configura o *target* padrao.
 + **`systemctl isolate [target]`** : Muda o target em execuçao do sistema.
-	+ `init 0` --> `systemctl isolate poweroff.target`
+	+ `init 0` --> `systemctl isolate poweroff.target|shutdown.target`
 	+ `init 1` --> `systemctl isolate rescue.target`
 	+ `init 2|3|4` --> `systemctl isolate multi-user.target`
 	+ `init 5`  --> `systemctl isolate graphical.target`
@@ -98,4 +98,4 @@ Scritps de inicializaçao do Systemd: **`/etc/systemd/system/`**
 ### ACPI
 **A**dvanced **C**onfiguration and **P**ower **I**nterface e uma especificaçao que fornece um padrao aberto para a configuraçao de dispositivos e gerenciamento de energia pelo sistema operacional.
 
-`acpid` : Daemon que faz o gerenciamento de energia da maquina. Exemplo: apertar o botao de desligar, maquina ficar sem nenhum input por um tempo.
+`acpid` : Daemon que faz o gerenciamento de energia da maquina. Exemplo: apertar o botao de desligar, a maquina entrar em hibernaçao depois de um tempo etc.
