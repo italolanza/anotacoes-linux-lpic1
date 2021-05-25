@@ -12,3 +12,4 @@ Repositorio para guardar as anotacoes a respeito das lives de treinamento para L
 4. [Arquitetura do Sistema](./Arquitetura%20do%20Sistema.md)
 5. [Trabalhando com Discos](./Trabalhando%20com%20Discos.md)
 6. [Inicialização do Sistema](./Inicializacao%20do%20Sistema.md)
+7. [Bibliotecas Compartilhadas](./Bibliotecas%20Compartilhadas.md)
