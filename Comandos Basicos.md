@@ -1,4 +1,3 @@
-
 ## Comandos basicos
 
 
@@ -26,4 +25,5 @@
 + **`man [nome_do_comando]`** : Armazena documentaçao dos comandos (e alguns arquivos de configuraçao) offiline.
 + **`wall`** : Manda mensagens para todos os usuarios
 + **`write [user] [tty]`** : Manda mensagem para um usuario em especifico
-
++ **`xxd`** : Make a hexdump or do the reverse.
++ **`hexdump`** : Display file contents in hexadecimal, decimal, octal, or ascii

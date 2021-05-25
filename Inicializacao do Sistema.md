@@ -3,10 +3,10 @@ Ordem:
 
 1. **`BIOS`** - Basic Input/Output System. Inicia o MBR
 2. **`MBR`** - Master Boot Record (Primeiros 512bytes do disco). Contem o Bootloader e a tabela de partiçoes. O Bootloader e o gerenciador de inicializador
-3. **`GRUB`** - GRand Unified Bootloader, responsavel por carregar o Kernel.
+3. **`Bootloader`** - O Bootloader e programa responsavel por carregar o Kernel. A maioria das distribuiçoes Linux utilzam o **GRUB** ( **GR**and **U**nified **B**ootloader) como bootloader.
 4. **`Kernel`** - Carrega o Initrd ou Initramfs (FS carregado na RAM) que auxilia com arquivos necessarios para o Kernel  realizar a inicializaçao do sistema corretamente.
 5. **`Init`** - Primeiro programa inicializado pelo Kernel. E reponsavel por iniciar outros programas/serviços.
-6. **`RunLevel`** - 
+
 
 > **Recuperando a senha do boot**
 	> Dentro da entrada do Kernel no GRUB, adicionar o  parametro init no Kernel da seguinte forma: `init=/bin/bash rw`. 
@@ -76,6 +76,118 @@ Scritps de inicializaçao do Systemd: **`/etc/systemd/system/`**
 + **`systemctl status [nome_do_servico].service`** : Imprime na tela o estado do serviço.
 
 <br>
+<br>
+<br>
+
+## Bootloaders
+E o programa responsavel por carregar o Kernel e assim inicializar o sistema. Fica instalado entre o MBR e a primeira partiçao do disco.
+
++ **`/boot/`** : Caminho onde se encontra arquivos de boot;
+	+ **`/boot/config-[versao]-[arch]`** : Arquivo te texto que contem informaçoes/parametros de compilaçao do Kernel. Esse arquivo e gerado quando o Kernel e compilado;
+	+ **`/boot/vmlinuz-[versao]-[arch]`** : Arquivo de imagem do Kernel;
+	+ **`/boot/System.map-[versao]-[arch]`** : 
+	+ **`/boot/initrd.img-[versao]`** : Arquivo que contem a imagem do pseudo FS que e carregado na RAM durante a inicializaçao do sistema. Contem utilitarios que auxiliam o Kernel a inicializar o sistema.
+
+Comandos do Terminal do GRUB (2 e Legacy)
+
++ **`root (hd0,0)`** - partiçao onde se encontra o diretorio `/boot/`
++ **`setup (hd0)`** - disco sera instalado o GRUB
++ **`ls`** : lista os discos e file systems.
+	+ **`ls [dev]`** : lista arquivos de disco;
++ **`set [param]=[value]`** : Utilitario que pode ser utilizado para alterar parametros de configuraçao. Os parametros sao os mesmos utilzados nos arquivos do sistema.
++ **`set root [particao]`** : Define a partiçao que possui o diretorio */boot/* que do Kernel que sera inicializada.
+
+<br>
+
+### GRUB Legacy
+
++ **`/boot/grub/menu.lst`** : Arquivo de configuraçao do GRUB Legacy. Possui os 
++ **`grub-install [DEVICE]`** : Utilitario para realizar a instalaçao do GRUB legacy em um dispisitvo selecionado. 
+	+ Exemplo: `grub-install /dev/sda`
++ **`update-grub`** : Utilitario usado para reler as configuraçoes e gerar um novo arquivo de configuraçao.
+
+<br>
+
+#### Representaçao dos Discos
+
+**`HD(X,Y)`** - **H**ard **D**isk; **X** representa o disco e **Y** representa a partiçao.
+
+**Exemplo:** `(hd0,0)` - Primeiro disco, primeira partiçao
+
+> Nota: A numeraçao dos discos e das partiçoes começam em 0.
+
+<br>
+
+#### Exemplo Arquivo de Configuraçao
+Como adicionar um Kernel novo no GRUB Legacy: 
+
+**Exemplo:**
+```
+# Adicionar no /boot/grub/menu.lst
+
+title "Debian 10"		# Define o nome que aparece no menu
+root (hd0,0) 			# Define a partiçao onde esta a partiçao /boot
+kernel /boot/vmlinux-5-11.0-16-46-generic ro root=/dev/sda5
+initrd /boot/initrd-5-11.0.46-generic
+default=0				# Define o Kernel padrao sera utilizado
+Timeout=15				# Timeout em segundos ate ele inicilizar o Kernel padrao
+							# 0 : Nao mostra o menu de escolha
+							# -1 : Mantem o menu indefinidamente
+```
+
+<br>
+
+### GRUB 2
+
+#### Instalando o GRUB atraves do Terminal do GRUB
+
+<br>
+
+#### Comandos e Diretorios 
++ **`/boot/grub2/grub.cfg`** : Arquivo de configuraçao do GRUB2. Esse arquivo e gerado atraves da leitura de outros arquivos e nao deve ser editado.	
+	+ **`/etc/grub.d/`** : Diretorio que contem scripts que sao lidos para gerar o arquivo de configuraçao do GRUB 2
+	+ /etc/grub.d/40_custom
+	+ **`/etc/default/grub`** : Arquivo semelhante ao `/boot/grub/menu.lst` do GRUB Legacy. Possui configuraçoes do GRUB.
+		+ Algumas configuraçoes importantens:
+			+ `GRUB_DEFAULT` : Define o Kernel padrao do sistema. Pode ser especificado pela ordem numerica  (0 a N) ou pelo nome do titulo.
+			+ `GRUB_SAVEDEFAULT` : Se marcado com *true*,  ele sempre vai selecionar o ultimo Kernel selecionado como padrao;
+			+ `GRUB_TIMEOUT` :  Define o tempo de espera que o menu do GRUB fica disponivel;
+			+ `GRUB_CMDLINE_LINUX` : Parametros passados ao Kernel;
+
++ **`grub2-install [DEVICE]`** : Utilitario para realizar a instalaçao do GRUB 2 em um dispisitvo selecionado. 
+	+ Exemplo: `grub2-install /dev/sda`
+ + **`grub2-mkconfig -o /boot/grub2/grub.cfg`** : Gera um arquivo de configuraçao baseado em um arquivo editado.
+ 
+<br>
+
+#### Exemplo Arquivo de Configuraçao
+Como adicionar um Kernel novo no GRUB 2:
+
+```
+# Adicionar no /etc/grub.d/40_custom
+# ou no /etc/default/grub (nao recomentado)
+
+# Entrada de Kernel
+menuentry "Debian 10" {
+			set root=(hd0,1)
+			linux /boot/vmlinuz root=/dev/sda1 ro quiet splash
+			initrd /boot/initrd.img
+		}
+```
+
+<br>
+
+#### Representaçao dos Discos
+
+**`HD(X,Y)`** - **H**ard **D**isk; **X** representa o disco e **Y** representa a partiçao.
+
+**Exemplo:** `(hd0,1)` - Primeiro disco, primeira partiçao
+
+> Nota: A **numeraçao dos discos** **começa em 0** e das **partiçoes** começam **em 1**.
+
+<br>
+<br>
+<br>
 
 ## Desligando e Reiniciando o Sistema
 ### Comandos
@@ -99,3 +211,6 @@ Scritps de inicializaçao do Systemd: **`/etc/systemd/system/`**
 **A**dvanced **C**onfiguration and **P**ower **I**nterface e uma especificaçao que fornece um padrao aberto para a configuraçao de dispositivos e gerenciamento de energia pelo sistema operacional.
 
 `acpid` : Daemon que faz o gerenciamento de energia da maquina. Exemplo: apertar o botao de desligar, a maquina entrar em hibernaçao depois de um tempo etc.
+
+<br>
+

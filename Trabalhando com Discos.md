@@ -2,16 +2,19 @@
 **sd**_x_*y* - SCSI (**S**mall **C**omputer **S**ystem **I**nterface) Disk. Onde *x* e a ordem que o disco foi reconhecido pelo Kernel e *y* representa a partiçao do disco.
 
 **Exemplo: **
->sda
+> sda
 ├─sda1
 └─sda2
 
+<br>
 
 ## Sistemas de Arquivos
 Para poder trabalhar com uma partiçao de disco, ela precisa ser formatada utilizando algum file system. Exemplo de FS's: ext, FAT, ZFS XFS.
 
 
 Mount point: diretorio que e associado a um dispositivo de bloco.
+
+<br>
 
 ## Particionamento de Discos
 

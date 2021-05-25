@@ -1,4 +1,6 @@
-# **F.H.S** -> **F**ile System **H**ierarchy **S**tandard
+# **F.H.S** -> **F**ilesystem **H**ierarchy **S**tandard
+Define os principais diretorios, e o seu conteudo, em um sistema operacional Linux ou do tipo Unix.
+
 
 ## Tipos de arquivos
 
