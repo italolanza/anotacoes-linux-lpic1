@@ -5,7 +5,7 @@
 
 ### `/proc/`
 + **`/proc/uptime`** :  Possui as informaçoes de quanto tempo a maquina esta ligada.
-	+ **`updtime`** : Comando/Utilitario que apresenta as informaçoes de maneira mais amigavel
+	+ **`uptime`** : Comando/Utilitario que apresenta as informaçoes de maneira mais amigavel
 
 + **`/proc/cpuinfo`** : Armazena informaçoes a respeito do processador (CPU) da maquina.
 

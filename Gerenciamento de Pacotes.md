@@ -79,7 +79,7 @@ Faz a gestao (remoçao, instalaçao e atualizaçao) de pacotes que ja estao na m
 + **`rpm -i [nome_pacote].rpm`** -> realiza a instalaçao de um pacote `.rpm`;
 	+ **`rpm -ivh [nome_pacote].rpm`** -> realiza a instaçao do pacote de maneira verbosa e com barra de progresso;
 + **`rpm -e [nome_pacote]`** -> realiza a remoçao do pacote;
-+ **`rpm -U [nome_pacote].rpm`** -> realiza a atualizaçao de um pacote para uma versao mais nova;
++ **`rpm -U [nome_pacote].rpm`** -> realiza a atualizaçao de um pacote ja instalado para uma versao mais nova;
 + **`rpm -q`** -> entra no modo de consulta do *rpm* (q == Query):
 	+ **`rpm -qa`** -> lista todos os pacotes instalados;
 	+ **`rpm -qi [nome_pacote]`** -> traz informaçoes a respeito do pacote instalado;
@@ -111,9 +111,9 @@ Faz o download de pacotes (e suas dependencias) que estao em repositorios extern
 
 + **`yum install [nome_pacote]`** -> realiza a instalaçao do pacote;
 + **`yum remove [nome_pacote]`** -> realiza a remoçao do pacote;
-+ **`yum search [nome_pacote|padrao]`** -> busca nos repositorios pelo nome ou padrao especificado. Ele busca tanto pelo nome do pacote quanto pela descriçao;
++ **`yum search [nome_pacote|regex]`** -> busca nos repositorios pelo nome ou padrao especificado. Ele busca tanto pelo nome do pacote quanto pela descriçao;
 + **`yum update`** -> realiza atualizaçao dos index e tambem dos pacotes disponiveis (equivalente ao *apt update + apt upgrade*);
-	+ **`yum update -x [lista_pacote|padrao]`** -> impede que os pacotes listas sejam atualizados;
+	+ **`yum update -x [lista_pacote|regex]`** -> impede que os pacotes listas sejam atualizados;
 		+ **Exemplo:** `yum update -x docker*,containerd*` 
 	+ **`yum update [nome_pacote]`** -> atualiza um pacote em especifico;
 + **`yum check-update`** -> verifica se ha algum pacote que pode ser atualizado;

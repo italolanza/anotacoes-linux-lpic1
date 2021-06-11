@@ -101,7 +101,7 @@ Comandos do Terminal do GRUB (2 e Legacy)
 
 ### GRUB Legacy
 
-+ **`/boot/grub/menu.lst`** : Arquivo de configuraçao do GRUB Legacy. Possui os 
++ **`/boot/grub/menu.lst`** : Arquivo de configuraçao do GRUB Legacy. Possui os seus parametros de inicializaçao.
 + **`grub-install [DEVICE]`** : Utilitario para realizar a instalaçao do GRUB legacy em um dispisitvo selecionado. 
 	+ Exemplo: `grub-install /dev/sda`
 + **`update-grub`** : Utilitario usado para reler as configuraçoes e gerar um novo arquivo de configuraçao.
@@ -157,6 +157,7 @@ Timeout=15				# Timeout em segundos ate ele inicilizar o Kernel padrao
 + **`grub2-install [DEVICE]`** : Utilitario para realizar a instalaçao do GRUB 2 em um dispisitvo selecionado. 
 	+ Exemplo: `grub2-install /dev/sda`
  + **`grub2-mkconfig -o /boot/grub2/grub.cfg`** : Gera um arquivo de configuraçao baseado em um arquivo editado.
+ + **`update-grub`** : Utilitario usado para reler as configuraçoes e gerar um novo arquivo de configuraçao.
  
 <br>
 

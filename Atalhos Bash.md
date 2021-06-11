@@ -5,5 +5,7 @@
 + **`CTRL + L`** : Limpa a tela
 + **`CTRL + W`** : Limpa a palavra anterior
 + **`CTRL + U`** : Limpa a linha inteira
-+ **`CTRL + K`** : Apaga tudo apos o cursor
++ **`CTRL + K`** : Limpa tudo apos o cursor
++ **`CTRL + R`** : Busca reversa por comandos rodados previamente
++ **`ESC + .`** : Retorna o valor do parametro utilizado pelo ultimo comando executado.
  
