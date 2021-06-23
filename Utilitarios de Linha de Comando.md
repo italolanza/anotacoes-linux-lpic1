@@ -24,7 +24,46 @@
 + **`export [var_name]`** : transforma uma variavel local em uma variavel de ambiente.
 + **`set`** : Lista todas variaveis e funçoes definidas no sistema.
 + **`env`** : Lista todas variaveis de ambiente.
-+ **`unset [var_name]`** : Apaga variaveis locais
++ **`unset [var_name]`** : Apaga variaveis locais.
+
+<br>
+
+
+## Filtros de Texto
+
++ **`cat </caminho/arquivo>`** : Imprime arquivos na saida padrao do sistema de maneira sequencia.
+	+ `cat -n </caminho/arquivo>` : Imprime o arquivo numerando as linhas.
++ **`zcat`** : Variaçao do *cat* para imprimir textos comprimidos em `gzip`.
++ **`bzcat`** : Variaçao do *cat* para imprimir textos comprimidos em `bzip2`.
++ **`xzcat`** : Variaçao do *cat* para imprimir textos comprimidos em `xz`.
++ **`cut`** : Utilitario que permite separar/cortar a saida baseado em delimitadores. Por padrão, utiliza *tab*.
+	+ **`cut -d "[delimitador] -f [Começo],[FIM]"`** : Recorta apenas os campos *começo* e *fim* utilizando o *delimitador* escolhido.
++ **`tr`** : Transforma uma saida traduzindo, espremendo e ou deletando caracteres a partir da entrada padrao.
+	+ `tr -s "[caracter]"` : Espreme todos os caracteres repetidos.
+		+ **Exemplo:** `cat /etc/passwd | cut -d ":" -f 1`
++ **`head [/caminho/arquivo]`** : Imprime as 10 primeiras linhas de um arquivo.
++ **`tail [/caminho/arquivo]`** : Imprime as 10 últims linhas de um arquivo
+	+ **`tail -f [/caminho/arquivo]`** : Imprime as ultimas 10 linhas do arquivo e continua imprimindo linhas conforme o arquivo for atualizado. Bom para seguir logs.
+	+ **`tail -n[quantidade] [/caminho/arquivo]`** : Imprime as ultimas *n* linhas do arquivo.
++ **`less [caminho/arquivo]`** : Paginador
++ **`nl [caminho/arquivo]`** :  Escreve em um arquivo numerando as linhas. Semelhante ao `cat -n`.
+	+ `nl -b [caminho/arquivo]` : Enumera também linhas em branco.
++ **`od`** : *Octal dump*, imprime na saida padrao (ou em um arquivo) a representaçao do mesmo octal (ou outros formatos). 
++ **`paste`** : Escreve na saída linhas separadas por um delimitador. Cada coluna e composta pela linha de um arquivo.
++ **`split [caminho/arquivo]`** : Utilitario que divide um arquivo em varios com tamanho especifico. Voce consegue tambem definir um prefixo para o nome.
+	+ **Exemplo** : `split -b 100M arquivo`
+		+ A opçao `-b` serve para definir o tamanho em bytes dos arquivos gerados.
+	+ **Exemplo** : `split -n 5 arquivo`
+		+ A opçao `-n` serve para definir a quantidade de arquivos gerados.
++ **`sort [nome/arquivo]`** : Ordena um arquivo (ou stream) seguindo um criterio. Por padrao, ordem alfabetica.
++ **`uniq`** : Utilitario que permite suprimir caracteres ou linhas repetidas.
++ **`wc`** : *Word count*, contabiliza linhas, palavras e caracteres de um arquivo.
++ **`sed`** : Utilitario manipulador de textos em arquivos (ou streams).
+	+ **Exemplo** : `sed -i 's/suporte/batata/g'` 
+		+ Substitui a palavra "suporte" por "batata" e todas as ocorrencias na mesma linha.
++ **`md5sum [caminho/arquivo]`** : Gera uma hash dado um arquivo.
++ **`sha256sum [caminho/arquivo]`** : Gera uma hash dado um arquivo.
++ **`sha512sum [caminho/arquivo]`** : Gera uma hash dado um arquivo.
 
 <br>
 
